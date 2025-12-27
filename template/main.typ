@@ -1,4 +1,4 @@
-#import "../src/lib.typ": project, subtask, task
+#import "../src/lib.typ": project, subtask, task, source
 
 // --- Document Setup ---
 #show: project.with(
@@ -20,13 +20,13 @@
   Erklären Sie den Unterschied zwischen Compiler und Interpreter. Nennen Sie jeweils zwei Vor- und Nachteile.
 ]
 
-Ein *Compiler* übersetzt den gesamten Quellcode vor der Ausführung in Maschinencode.
+Ein *Compiler* übersetzt den gesamten Quellcode vor der Ausführung in Maschinencode. #source("wbh_studienheft", supplement: "S. 5")
 - *Vorteil:* Schnellere Ausführung des resultierenden Programms.
 - *Vorteil:* Compiler können globale Optimierungen durchführen.
 - *Nachteil:* Der Kompilierungsschritt braucht Zeit.
 - *Nachteil:* Fehler werden erst beim Kompilieren (nicht zur Laufzeit) sichtbar.
 
-Ein *Interpreter* führt den Quellcode Zeile für Zeile direkt aus.
+Ein *Interpreter* führt den Quellcode Zeile für Zeile direkt aus. #source("wbh_studienheft", supplement: "S. 8")
 - *Vorteil:* Einfacheres Debugging und Testen ("REPL").
 - *Vorteil:* Plattformunabhängigkeit (sofern der Interpreter verfügbar ist).
 - *Nachteil:* Langsamere Ausführung.
@@ -68,3 +68,9 @@ $
       return n * factorial(n - 1)
   ```
 ]
+
+Wie im Studienheft beschrieben @wbh_studienheft, ist die Rekursion ein wichtiges Konzept.
+
+// --- Bibliography ---
+#pagebreak()
+#bibliography("references.bib", style: "apa", title: "Literaturverzeichnis")

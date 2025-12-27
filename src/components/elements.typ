@@ -44,3 +44,8 @@
   body
   v(0.5em)
 }
+
+// Function to add a source reference (superscript citation)
+#let source(key, supplement: none) = {
+  super(cite(label(key), supplement: supplement))
+}

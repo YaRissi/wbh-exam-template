@@ -1,29 +1,77 @@
-# WBH Exam Template
+# WBH Typst Template (B-Aufgabe)
 
-A Typst template for creating WBH exam submissions (B-Aufgaben).
+A modern, clean Typst template specifically designed for "B-Aufgaben" (assignments) at the Wilhelm Büchner Hochschule (WBH).
+
+## Features
+
+- **Professional Header:** Includes all required WBH student and course metadata.
+- **Dynamic Header/Footer:** Automatically displays the assignment code on every page and keeps track of page numbering.
+- **Clean Layout:** Left-aligned title block with a structured grid for personal details.
+- **Utility Components:** Pre-defined styles for tasks and subtasks.
+- **WBH Colors:** Integrated primary WBH blue and professional gray tones.
 
 ## Usage
 
-### Local Usage
-1. Clone this repository.
-2. Copy the `template` directory content to your new project folder or work directly in `template/main.typ`.
-3. Ensure the import in your `main.typ` points to `src/lib.typ` correctly if you are keeping this structure, or install the package locally.
+### 1. Document Setup
 
-### Features
-- **Header/Footer**: Automatically formatted with student info and page numbers.
-- **Tasks**: `#task(points: 10)[...]` block for clear separation.
-- **Questions**: `#question[...]` helper.
-- **Choices**: `#choice(("Option A", "Option B"))` for MCQs.
-- **Answer Spaces**: `#answer-lines(count: 5)` and `#answer-box(height: 5cm)`.
-
-## Configuration
-Update the `project` function arguments in `main.typ`:
+Import the template and configure your details in the `project` function:
 
 ```typst
+#import "src/lib.typ": project, task, subtask
+
 #show: project.with(
-  title: "B-Aufgabe 1",
-  course: "CS101",
-  student_name: "Your Name",
-  // ...
+  last_name: "Mustermann",
+  first_name: "Max",
+  assignment_code: "B-XXXXXXXXX",
+  street: "Musterstraße 1",
+  zip_city: "12345 Musterstadt",
+  student_id: "900123456",
+  course_id: "123456",
+  assignment_title: "Grundlagen der Informatik",
+  b_exam_name: "Thema der B-Aufgabe",
+  variant: "XXXXXXXXXXX",
 )
 ```
+
+### 2. Adding Tasks
+
+Use the `#task` and `#subtask` functions to structure your solutions:
+
+```typst
+#task(points: 10, title: "Example Task")[
+  Your task description or question goes here.
+]
+
+#subtask(title: "a)")[
+  Your solution for the subtask.
+]
+```
+
+## Configuration Fields
+
+| Field | Description |
+| :--- | :--- |
+| `last_name` | Your surname |
+| `first_name` | Your given name |
+| `assignment_code` | The official code (e.g., B-GND01-XX1-K02) |
+| `street` | Your street and house number |
+| `zip_city` | Your postal code and city |
+| `student_id` | Your WBH Matrikelnummer |
+| `course_id` | Your Studiengangsnummer |
+| `assignment_title` | The main title of the module |
+| `b_exam_name` | The specific name of the B-Aufgabe |
+| `variant` | The variant/version of the assignment |
+
+## Project Structure
+
+- `src/`: Core template logic and components.
+  - `lib.typ`: Main entry point for imports.
+  - `components/layout.typ`: Page setup, headers, and title block.
+  - `components/elements.typ`: Task and subtask definitions.
+  - `components/utils.typ`: Colors and constants.
+- `template/`: Contains `main.typ` as a starting point for your assignment.
+- `assets/`: Logos and other media.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

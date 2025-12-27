@@ -4,5 +4,5 @@
 #import "components/utils.typ": wbh-colors
 #import "components/layout.typ": project
 #import "components/elements.typ": (
-  answer-box, answer-lines, choice, question, task,
+  task, subtask
 )

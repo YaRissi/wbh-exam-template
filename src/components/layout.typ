@@ -40,7 +40,7 @@
 
   // Set text properties
   set text(font: "Arial", size: 11pt, lang: "de")
-  show math.equation: set text(font: "Fira Math")
+  // show math.equation: set text(font: "Fira Math")
 
   // Heading Styling
   show heading.where(level: 1): it => {

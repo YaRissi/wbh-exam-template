@@ -1,6 +1,8 @@
 build:compile:
   stage: build
-  image: ghcr.io/typst/typst:0.14.2
+  image: 
+  - name: ghcr.io/typst/typst:0.14.2
+    entrypoint: ["/bin/sh", "-c"]
   script:
-    - typst compile template/main.typ
+    - typst compile --root . template/main.typ
   interruptible: true

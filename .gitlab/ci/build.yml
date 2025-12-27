@@ -1,0 +1,6 @@
+build:compile:
+  stage: build
+  image: ghcr.io/typst/typst:0.14.2
+  script:
+    - typst compile template/main.typ
+  interruptible: true

@@ -9,23 +9,38 @@ This template is not yet published to the official Typst Universe. You can insta
 ### Prerequisites
 
 - [Python 3.9+](https://www.python.org/)
+- Recommended: [uv](https://github.com/astral-sh/uv) (for easy script execution)
 
 ### Installation Steps
 
 1. Clone this repository:
+
    ```bash
    git clone https://gitlab.com/your-username/wbh-typst-template.git
    cd wbh-typst-template
    ```
+
 2. Run the installation script:
+
+   Using `uv` (recommended, handles dependencies automatically):
+
    ```bash
+   uv run scripts/install.py
+   ```
+
+   Or using standard Python (you may need to install dependencies like `tomli` first):
+
+   ```bash
+   pip install tomli
    python scripts/install.py
    ```
+
    This script will copy the template to your local Typst package directory and update the internal paths.
 
 3. You can now initialize a new project from this template:
+
    ```bash
-   typst init @local/wbh-exam-template:0.2.1 my-assignment
+   typst init @local/wbh-exam-template:0.2.2 my-assignment
    ```
 
 ## Usage
@@ -35,7 +50,7 @@ This template is not yet published to the official Typst Universe. You can insta
 If you have installed the package locally, import it using the `@local` syntax in your `main.typ`:
 
 ```typst
-#import "@local/wbh-exam-template:0.2.1": project
+#import "@local/wbh-exam-template:0.2.2": project
 
 #show: project.with(
   last_name: "Mustermann",
@@ -59,7 +74,7 @@ If you have installed the package locally, import it using the `@local` syntax i
 You can split your solutions into separate files within the `tasks/` directory. Each task file should import the required functions from the package:
 
 ```typst
-#import "@local/wbh-exam-template:0.2.1": task, subtask, source
+#import "@local/wbh-exam-template:0.2.2": task, subtask, source
 
 #task(points: 10, title: "Example Task")[
   Your task description or question goes here.
@@ -82,7 +97,7 @@ Use the `#source` function for superscript citations. It supports page numbers a
 #source("wbh_studienheft", supplement: "S. 12")
 
 // AI Citation (adds a footnote with model and prompt)
-#source("gemini", model: "Gemini 1.5 Pro", prompt: "Explain recursion.")
+#source("gemini", model: "Gemini 3 Pro", prompt: "Explain recursion.")
 ```
 
 Don't forget to add your references to `references.bib` and include the bibliography at the end of `main.typ`:

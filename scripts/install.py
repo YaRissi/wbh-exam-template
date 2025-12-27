@@ -67,7 +67,7 @@ def main():
     # Get exclusions from typst.toml if present
     excludes = package.get("exclude", [])
     # Add some sensible defaults for local dev that might not be in toml
-    hardcoded_excludes = [".git", ".github", ".gitlab", "scripts", ".gemini", ".vscode", ".idea", "node_modules"]
+    hardcoded_excludes = [".git", ".github", ".gitlab", "scripts", ".gemini", ".vscode", ".idea", "node_modules", "*.pdf"]
     
     def ignore_patterns(path, names):
         ignored = set()
@@ -90,6 +90,7 @@ def main():
         shutil.copytree(repo_root, target_dir, ignore=ignore_patterns)
         print(f"Successfully installed {name}:{version} to local packages.")
         print(f"Usage: #import \"@local/{name}:{version}\": *")
+        print(f"typst init @local/{name}:{version}")
     except Exception as e:
         print(f"Failed to copy files: {e}")
         sys.exit(1)

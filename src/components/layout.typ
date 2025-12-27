@@ -8,11 +8,11 @@
   student_name: "",
   student_id: "",
   semester: "",
-  body
+  body,
 ) = {
   // Set document metadata
   set document(author: student_name, title: title)
-  
+
   // Set page properties (A4, margins, header/footer)
   set page(
     paper: "a4",
@@ -22,7 +22,7 @@
       #grid(
         columns: (1fr, 1fr),
         align(left)[#image("../assets/logo-wbh.jpg", width: 4cm)],
-        align(right)[#title \ #date]
+        align(right)[#title \ #date],
       )
       #line(length: 100%, stroke: 0.5pt + wbh-colors.primary)
     ],
@@ -33,9 +33,9 @@
         columns: (1fr, 1fr, 1fr),
         align(left)[#student_name (#student_id)],
         align(center)[Semester: #semester],
-        align(right)[Page #context counter(page).display("1 of 1")]
+        align(right)[Page #context counter(page).display("1 of 1")],
       )
-    ]
+    ],
   )
 
   // Set text properties
@@ -47,27 +47,27 @@
     set text(fill: wbh-colors.primary, size: 14pt)
     block(below: 1em, it)
   }
-  
+
   // Title Block
   align(center)[
-    #text(1.5em, weight: "bold", fill: wbh-colors.primary)[#title] \ 
+    #text(1.5em, weight: "bold", fill: wbh-colors.primary)[#title] \
     #v(0.5em)
-    #text(1.2em)[#course] \ 
+    #text(1.2em)[#course] \
     #v(1em)
     #grid(
       columns: (auto, auto),
       gutter: 2em,
       align(left)[
-        *Student:* #student_name \ 
+        *Student:* #student_name \
         *Matrikel-Nr.:* #student_id
       ],
       align(left)[
-        *Datum:* #date \ 
+        *Datum:* #date \
         *Semester:* #semester
-      ]
+      ],
     )
   ]
-  
+
   v(1cm)
 
   // Main Content

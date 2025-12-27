@@ -1,6 +1,8 @@
 lint:fmt:
   stage: lint
-  image: ghcr.io/enter-tainer/typstyle:latest
+  image: rust:1.88-slim
+  before_script:
+    - cargo install typstyle --locked
   script:
     - typstyle --check .
   interruptible: true

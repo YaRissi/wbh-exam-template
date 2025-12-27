@@ -16,11 +16,11 @@
     stroke: luma(200),
     width: 100%,
     [
-      #text(weight: "bold", fill: wbh-colors.primary)[Aufgabe #context task-counter.display()]: 
+      #text(weight: "bold", fill: wbh-colors.primary)[Aufgabe #context task-counter.display()]:
       #if points != none [ (#points Punkte) ]
       #v(0.5em)
       #body
-    ]
+    ],
   )
 }
 
@@ -49,5 +49,10 @@
 // Function for a generic answer box
 #let answer-box(height: 3cm) = {
   v(0.5em)
-  rect(width: 100%, height: height, stroke: 0.5pt + wbh-colors.gray, fill: white)
+  rect(
+    width: 100%,
+    height: height,
+    stroke: 0.5pt + wbh-colors.gray,
+    fill: white,
+  )
 }

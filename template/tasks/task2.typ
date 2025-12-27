@@ -1,8 +1,10 @@
 #import "../../src/lib.typ": solution, task
 
-#task(points: 15, title: "Mathematik")
+#task(points: 15, title: "Mathematik")[
+  *Berechnen Sie die Fakultät von 5.*
+]
 
-_Berechnen Sie die Fakultät von 5._
+
 
 #solution[
   Die Fakultät $n!$ ist definiert als:

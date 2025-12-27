@@ -27,7 +27,7 @@
   v(0.5em)
   if body != none {
     block(
-      fill: luma(250),
+      fill: luma(245),
       inset: 10pt,
       radius: 4pt,
       width: 100%,
@@ -40,14 +40,20 @@
 // Function for sub-tasks (a, b, c...)
 #let subtask(title: none, points: none, body) = {
   v(0.5em)
-  grid(
-    columns: (auto, 1fr, auto),
-    gutter: 0.5em,
-    text(weight: "bold", title),
-    text(style: "italic", body),
-    if points != none {
-      align(right, text(style: "italic")[#points Pkt.])
-    },
+  block(
+    fill: luma(245),
+    inset: 8pt,
+    radius: 4pt,
+    width: 100%,
+    grid(
+      columns: (auto, 1fr, auto),
+      gutter: 0.5em,
+      text(weight: "bold", title),
+      text(style: "italic", body),
+      if points != none {
+        align(right, text(style: "italic")[#points Pkt.])
+      },
+    )
   )
   v(0.5em)
 }

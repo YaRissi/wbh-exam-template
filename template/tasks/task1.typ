@@ -1,8 +1,8 @@
 #import "../../src/lib.typ": solution, source, task
 
-#task(points: 10, title: "Compiler vs. Interpreter")
-
-_Erklären Sie den Unterschied zwischen Compiler und Interpreter. Nennen Sie jeweils zwei Vor- und Nachteile._
+#task(points: 10, title: "Compiler vs. Interpreter")[
+  *Erklären Sie den Unterschied zwischen Compiler und Interpreter. Nennen Sie jeweils zwei Vor- und Nachteile.*
+]
 
 #solution[
   Ein *Compiler* übersetzt den gesamten Quellcode vor der Ausführung in Maschinencode. #source("wbh_studienheft", supplement: "S. 5")

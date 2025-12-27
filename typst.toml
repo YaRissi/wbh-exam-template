@@ -8,7 +8,7 @@ description = "A Typst template for WBH exam solutions (B-Aufgaben)."
 repository = "https://github.com/YaRissi/wbh-typst-template"
 keywords = ["wbh", "exam", "template", "education"]
 categories = ["text"]
-exclude = [".gitlab/", ".gitlab-ci.yml", ".gemini/"]
+exclude = [".gitlab/", ".gitlab-ci.yml", ".gemini/", "scripts/"]
 
 [template]
 path = "template"

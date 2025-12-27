@@ -1,4 +1,4 @@
-#import "../src/lib.typ": project, subtask, task, source
+#import "../src/lib.typ": project, source, subtask, task
 
 // --- Document Setup ---
 #show: project.with(
@@ -67,6 +67,8 @@ $
           return 1
       return n * factorial(n - 1)
   ```
+
+  Dieser Code wurde generiert. #source("gemini", model: "Gemini 3 Pro", prompt: "Schreibe eine rekursive Fakultätsfunktion in Python.")
 ]
 
 Wie im Studienheft beschrieben @wbh_studienheft, ist die Rekursion ein wichtiges Konzept.

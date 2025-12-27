@@ -46,6 +46,12 @@
 }
 
 // Function to add a source reference (superscript citation)
-#let source(key, supplement: none) = {
+#let source(key, supplement: none, model: none, prompt: none) = {
   super(cite(label(key), supplement: supplement))
+  if prompt != none {
+    footnote[
+      #if model != none [*Modell:* #model. ]
+      *Prompt:* "#prompt"
+    ]
+  }
 }

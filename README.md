@@ -40,7 +40,7 @@ This template is not yet published to the official Typst Universe. You can insta
 3. You can now initialize a new project from this template:
 
    ```bash
-   typst init @local/wbh-exam-template:0.2.4 my-assignment
+   typst init @local/wbh-exam-template:0.3.0 my-assignment
    ```
 
 ## Usage
@@ -50,7 +50,7 @@ This template is not yet published to the official Typst Universe. You can insta
 If you have installed the package locally, import it using the `@local` syntax in your `main.typ`:
 
 ```typst
-#import "@local/wbh-exam-template:0.2.4": project
+#import "@local/wbh-exam-template:0.3.0": project
 
 #show: project.with(
   last_name: "Mustermann",
@@ -74,7 +74,7 @@ If you have installed the package locally, import it using the `@local` syntax i
 You can split your solutions into separate files within the `tasks/` directory. Each task file should import the required functions from the package:
 
 ```typst
-#import "@local/wbh-exam-template:0.2.4": task, subtask, source
+#import "@local/wbh-exam-template:0.3.0": task, subtask, source
 
 #task(points: 10, title: "Example Task")[
   Your task description or question goes here.

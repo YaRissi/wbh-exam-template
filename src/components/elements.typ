@@ -53,7 +53,7 @@
       if points != none {
         align(right, text(style: "italic")[#points Pkt.])
       },
-    )
+    ),
   )
   v(0.5em)
 }

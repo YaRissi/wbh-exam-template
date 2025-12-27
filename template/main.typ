@@ -18,6 +18,7 @@
 
 #include "tasks/task1.typ"
 #include "tasks/task2.typ"
+#pagebreak()
 #include "tasks/task3.typ"
 
 // --- Bibliography ---

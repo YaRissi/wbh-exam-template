@@ -20,7 +20,7 @@
   // Set page properties (A4, margins, header/footer)
   set page(
     paper: "a4",
-    margin: (top: 3cm, bottom: 2.5cm, left: 2.5cm, right: 2.5cm),
+    margin: (top: 3cm, bottom: 2.5cm, left: 2.5cm, right: 4cm),
     header: [
       #set text(8pt)
       #grid(
@@ -49,8 +49,15 @@
       "Calibri",
       "Sans Serif Collection",
     ),
-    size: 11pt,
+    size: 10pt,
     lang: "de",
+  )
+
+  set par(
+    leading: 0.6em, // 1.5 line spacing (approx)
+    justify: true,
+    first-line-indent: 0pt,
+    spacing: 1.2em, // parskip full
   )
 
   // Heading Styling

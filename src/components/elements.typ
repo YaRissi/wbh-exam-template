@@ -6,7 +6,8 @@
 #let task-counter = counter("task")
 
 // Function to create a task header
-#let task(points: none, title: none, body) = {
+#let task(points: none, title: none, ..args) = {
+  let body = args.pos().at(0, default: none)
   task-counter.step()
   v(1.5em)
   block(
@@ -37,12 +38,26 @@
 }
 
 // Function for sub-tasks (a, b, c...)
-#let subtask(title: none, body) = {
+#let subtask(title: none, points: none, body) = {
   v(0.5em)
-  text(weight: "bold")[#title]
-  h(0.5em)
-  body
+  grid(
+    columns: (auto, 1fr, auto),
+    gutter: 0.5em,
+    text(weight: "bold", title),
+    text(style: "italic", body),
+    if points != none {
+      align(right, text(style: "italic")[#points Pkt.])
+    },
+  )
   v(0.5em)
+}
+
+// Function to format the solution
+#let solution(body) = {
+  pad(left: 1.5em)[
+    #body
+  ]
+  v(2em)
 }
 
 // Function to add a source reference (superscript citation)

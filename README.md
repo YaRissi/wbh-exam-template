@@ -1,6 +1,6 @@
 # WBH Typst Template (B-Aufgabe)
 
-Unofficial Typst template for "B-Aufgaben" (assignments) at the Wilhelm Büchner Hochschule (WBH), utilizing WBH colors.
+Unofficial Typst template for "B-Aufgaben" (assignments) at the Wilhelm Büchner Hochschule (WBH), utilizing WBH colors and layout standards.
 
 ## Local Installation
 
@@ -74,14 +74,18 @@ If you have installed the package locally, import it using the `@local` syntax i
 You can split your solutions into separate files within the `tasks/` directory. Each task file should import the required functions from the package:
 
 ```typst
-#import "@local/wbh-exam-template:0.3.0": task, subtask, source
+#import "@local/wbh-exam-template:0.3.0": task, subtask, solution, source
 
 #task(points: 10, title: "Example Task")[
-  Your task description or question goes here.
+  Your task description or question goes here. It will be rendered with a distinct grey background.
 ]
 
 #subtask(title: "a)")[
-  Your solution for the subtask.
+  The subtask description also gets a grey background.
+]
+
+#solution[
+  Your solution for the subtask goes here, typically inside a `#solution` block for proper indentation.
 ]
 ```
 

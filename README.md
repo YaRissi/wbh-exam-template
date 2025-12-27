@@ -6,10 +6,10 @@ Unofficial Typst template for "B-Aufgaben" (assignments) at the Wilhelm Büchner
 
 ### 1. Document Setup
 
-Import the template and configure your details in the `project` function:
+Import the template and configure your details in the `project` function in `template/main.typ`:
 
 ```typst
-#import "src/lib.typ": project, task, subtask
+#import "../src/lib.typ": project
 
 #show: project.with(
   last_name: "Mustermann",
@@ -23,13 +23,18 @@ Import the template and configure your details in the `project` function:
   b_exam_name: "Thema der B-Aufgabe",
   variant: "XXXXXXXXXXX",
 )
+
+// Include your tasks
+#include "tasks/task1.typ"
 ```
 
 ### 2. Adding Tasks
 
-Use the `#task` and `#subtask` functions to structure your solutions:
+You can split your solutions into separate files within the `template/tasks/` directory for better organization. Use the `#task` and `#subtask` functions:
 
 ```typst
+#import "../../src/lib.typ": task, subtask, source
+
 #task(points: 10, title: "Example Task")[
   Your task description or question goes here.
 ]
@@ -37,6 +42,28 @@ Use the `#task` and `#subtask` functions to structure your solutions:
 #subtask(title: "a)")[
   Your solution for the subtask.
 ]
+```
+
+### 3. Citing Sources
+
+Use the `#source` function for superscript citations. It supports page numbers and AI documentation:
+
+```typst
+// Basic citation
+#source("wbh_studienheft")
+
+// Citation with page number
+#source("wbh_studienheft", supplement: "S. 12")
+
+// AI Citation (adds a footnote with model and prompt)
+#source("gemini", model: "Gemini 1.5 Pro", prompt: "Explain recursion.")
+```
+
+Don't forget to add your references to `template/references.bib` and include the bibliography at the end of `main.typ`:
+
+```typst
+#pagebreak()
+#bibliography("references.bib", style: "apa", title: "Literaturverzeichnis")
 ```
 
 ## Configuration Fields
@@ -59,9 +86,12 @@ Use the `#task` and `#subtask` functions to structure your solutions:
 - `src/`: Core template logic and components.
   - `lib.typ`: Main entry point for imports.
   - `components/layout.typ`: Page setup, headers, and title block.
-  - `components/elements.typ`: Task and subtask definitions.
+  - `components/elements.typ`: Task, subtask, and source definitions.
   - `components/utils.typ`: Colors and constants.
-- `template/`: Contains `main.typ` as a starting point for your assignment.
+- `template/`: Your workspace.
+  - `main.typ`: The main document file.
+  - `tasks/`: Directory for individual task files.
+  - `references.bib`: Your bibliography file.
 - `assets/`: Logos and other media.
 
 ## License

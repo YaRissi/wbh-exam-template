@@ -14,10 +14,14 @@
     stroke: (bottom: 1pt + wbh-colors.primary),
     inset: (bottom: 0.5em),
     [
-      #text(1.2em, weight: "bold", fill: wbh-colors.primary)[Aufgabe #context task-counter.display()]
+      #text(
+        1.2em,
+        weight: "bold",
+        fill: wbh-colors.primary,
+      )[Aufgabe #context task-counter.display()]
       #if title != none [ : #title ]
       #if points != none [ #h(1fr) #text(style: "italic")[#points Punkte] ]
-    ]
+    ],
   )
   v(0.5em)
   if body != none {
@@ -26,7 +30,7 @@
       inset: 10pt,
       radius: 4pt,
       width: 100%,
-      text(style: "italic", body)
+      text(style: "italic", body),
     )
     v(1em)
   }

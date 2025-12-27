@@ -1,4 +1,4 @@
-#import "../src/lib.typ": project, task, subtask
+#import "../src/lib.typ": project, subtask, task
 
 // --- Document Setup ---
 #show: project.with(
@@ -7,7 +7,7 @@
   student_name: "Max Mustermann",
   student_id: "900123456",
   semester: "WS 2024/25",
-  date: datetime.today().display()
+  date: datetime.today().display(),
 )
 
 // --- Solutions ---
@@ -37,8 +37,10 @@ Die Fakultät $n!$ ist definiert als:
 $ n! = n dot (n-1) dot ... dot 1 $
 
 Für $n=5$:
-$ 5! &= 5 dot 4 dot 3 dot 2 dot 1 \
-     &= 120 $
+$
+  5! & = 5 dot 4 dot 3 dot 2 dot 1 \
+     & = 120
+$
 
 #task(points: 20, title: "Programmierung")[
   Schreiben Sie eine Funktion `factorial(n)`.

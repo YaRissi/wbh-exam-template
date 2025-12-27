@@ -3,6 +3,4 @@
 
 #import "components/utils.typ": wbh-colors
 #import "components/layout.typ": project
-#import "components/elements.typ": (
-  task, subtask
-)
+#import "components/elements.typ": subtask, task

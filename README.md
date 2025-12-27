@@ -2,14 +2,40 @@
 
 Unofficial Typst template for "B-Aufgaben" (assignments) at the Wilhelm Büchner Hochschule (WBH), utilizing WBH colors.
 
+## Local Installation
+
+This template is not yet published to the official Typst Universe. You can install it locally to use it as a package.
+
+### Prerequisites
+
+- [Python 3.9+](https://www.python.org/)
+
+### Installation Steps
+
+1. Clone this repository:
+   ```bash
+   git clone https://gitlab.com/your-username/wbh-typst-template.git
+   cd wbh-typst-template
+   ```
+2. Run the installation script:
+   ```bash
+   python scripts/install.py
+   ```
+   This script will copy the template to your local Typst package directory and update the internal paths.
+
+3. You can now initialize a new project from this template:
+   ```bash
+   typst init @local/wbh-exam-template:0.2.1 my-assignment
+   ```
+
 ## Usage
 
 ### 1. Document Setup
 
-Import the template and configure your details in the `project` function in `template/main.typ`:
+If you have installed the package locally, import it using the `@local` syntax in your `main.typ`:
 
 ```typst
-#import "../src/lib.typ": project
+#import "@local/wbh-exam-template:0.2.1": project
 
 #show: project.with(
   last_name: "Mustermann",
@@ -30,10 +56,10 @@ Import the template and configure your details in the `project` function in `tem
 
 ### 2. Adding Tasks
 
-You can split your solutions into separate files within the `template/tasks/` directory for better organization. Use the `#task` and `#subtask` functions:
+You can split your solutions into separate files within the `tasks/` directory. Each task file should import the required functions from the package:
 
 ```typst
-#import "../../src/lib.typ": task, subtask, source
+#import "@local/wbh-exam-template:0.2.1": task, subtask, source
 
 #task(points: 10, title: "Example Task")[
   Your task description or question goes here.
@@ -59,7 +85,7 @@ Use the `#source` function for superscript citations. It supports page numbers a
 #source("gemini", model: "Gemini 1.5 Pro", prompt: "Explain recursion.")
 ```
 
-Don't forget to add your references to `template/references.bib` and include the bibliography at the end of `main.typ`:
+Don't forget to add your references to `references.bib` and include the bibliography at the end of `main.typ`:
 
 ```typst
 #pagebreak()
@@ -88,11 +114,12 @@ Don't forget to add your references to `template/references.bib` and include the
   - `components/layout.typ`: Page setup, headers, and title block.
   - `components/elements.typ`: Task, subtask, and source definitions.
   - `components/utils.typ`: Colors and constants.
-- `template/`: Your workspace.
+- `template/`: The starting point for your assignment (copied when using `typst init`).
   - `main.typ`: The main document file.
   - `tasks/`: Directory for individual task files.
   - `references.bib`: Your bibliography file.
 - `assets/`: Logos and other media.
+- `scripts/`: Utility scripts (e.g., for local installation).
 
 ## License
 

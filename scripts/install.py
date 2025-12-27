@@ -5,6 +5,7 @@
 # ]
 # ///
 
+import fnmatch
 import os
 import shutil
 import sys
@@ -73,8 +74,12 @@ def main():
         ignored = set()
         for name in names:
             # Check hardcoded excludes
-            if name in hardcoded_excludes:
-                ignored.add(name)
+            for pattern in hardcoded_excludes:
+                if fnmatch.fnmatch(name, pattern):
+                    ignored.add(name)
+                    break
+            
+            if name in ignored:
                 continue
             
             # Check typst.toml excludes (simple exact match or folder match)
@@ -88,9 +93,41 @@ def main():
     print("Copying files...")
     try:
         shutil.copytree(repo_root, target_dir, ignore=ignore_patterns)
+
+
+        # Post-process: Update imports in the installed template files
+        # We recursively look for .typ files in the installed template directory
+        # and replace relative imports with the package import.
+        template_dir = target_dir / "template"
+        package_import = f'@local/{name}:{version}'
+        
+        if template_dir.exists():
+            for file_path in template_dir.rglob("*.typ"):
+                content = file_path.read_text("utf-8")
+                
+                # Check for relative imports and replace them
+                # We look for common relative patterns used in the template
+                # IMPORTANT: Process longer paths first to avoid substring matching issues
+                # (e.g. replacing "../src" inside "../../src")
+                replacements = [
+                    ('../../src/lib.typ', package_import),
+                    ('../src/lib.typ', package_import),
+                ]
+                
+                new_content = content
+                modified = False
+                for old, new in replacements:
+                    if old in new_content:
+                        new_content = new_content.replace(old, new)
+                        modified = True
+                
+                if modified:
+                    print(f"Updated imports in {file_path.relative_to(target_dir)}")
+                    file_path.write_text(new_content, "utf-8")
+
         print(f"Successfully installed {name}:{version} to local packages.")
-        print(f"Usage: #import \"@local/{name}:{version}\": *")
-        print(f"typst init @local/{name}:{version}")
+        print(f"Usage: #import \"{package_import}\": *")
+        print(f"typst init {package_import}")
     except Exception as e:
         print(f"Failed to copy files: {e}")
         sys.exit(1)

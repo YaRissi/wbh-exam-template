@@ -2,12 +2,16 @@
 
 // --- Document Setup ---
 #show: project.with(
-  title: "B-Aufgabe: Grundlagen der Informatik",
-  course: "CS101 - Einführung",
-  student_name: "Max Mustermann",
+  last_name: "Mustermann",
+  first_name: "Max",
+  assignment_code: "B-XXXX-XXXXX-XX",
+  street: "Musterstraße 1",
+  zip_city: "12345 Musterstadt",
   student_id: "900123456",
-  semester: "WS 2024/25",
-  date: datetime.today().display(),
+  course_id: "XXXXXXX",
+  assignment_title: "Grundlagen der Informatik",
+  b_exam_name: "Name der B-Aufgabe",
+  variant: "XXXXXXX",
 )
 
 // --- Solutions ---

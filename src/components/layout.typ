@@ -20,13 +20,12 @@
   // Set page properties (A4, margins, header/footer)
   set page(
     paper: "a4",
-    margin: (top: 2.5cm, bottom: 2.5cm, left: 2.5cm, right: 2.5cm),
+    margin: (top: 3cm, bottom: 2.5cm, left: 2.5cm, right: 2.5cm),
     header: [
       #set text(8pt)
       #grid(
         columns: (1fr, 1fr),
-        align(left)[#image("../assets/logo-wbh.jpg", width: 3cm)],
-        align(right + bottom)[#assignment_code],
+        align(left)[#image("../assets/logo-wbh.jpg", width: 3cm)], align(right + bottom)[#assignment_code],
       )
       #line(length: 100%, stroke: 0.5pt + wbh-colors.primary)
     ],

@@ -1,14 +1,6 @@
 # WBH Typst Template (B-Aufgabe)
 
-A modern, clean Typst template specifically designed for "B-Aufgaben" (assignments) at the Wilhelm Büchner Hochschule (WBH).
-
-## Features
-
-- **Professional Header:** Includes all required WBH student and course metadata.
-- **Dynamic Header/Footer:** Automatically displays the assignment code on every page and keeps track of page numbering.
-- **Clean Layout:** Left-aligned title block with a structured grid for personal details.
-- **Utility Components:** Pre-defined styles for tasks and subtasks.
-- **WBH Colors:** Integrated primary WBH blue and professional gray tones.
+Unofficial Typst template for "B-Aufgaben" (assignments) at the Wilhelm Büchner Hochschule (WBH), utilizing WBH colors.
 
 ## Usage
 
@@ -49,18 +41,18 @@ Use the `#task` and `#subtask` functions to structure your solutions:
 
 ## Configuration Fields
 
-| Field | Description |
-| :--- | :--- |
-| `last_name` | Your surname |
-| `first_name` | Your given name |
-| `assignment_code` | The official code (e.g., B-GND01-XX1-K02) |
-| `street` | Your street and house number |
-| `zip_city` | Your postal code and city |
-| `student_id` | Your WBH Matrikelnummer |
-| `course_id` | Your Studiengangsnummer |
-| `assignment_title` | The main title of the module |
-| `b_exam_name` | The specific name of the B-Aufgabe |
-| `variant` | The variant/version of the assignment |
+| Field              | Description                               |
+| :----------------- | :---------------------------------------- |
+| `last_name`        | Your surname                              |
+| `first_name`       | Your given name                           |
+| `assignment_code`  | The official code (e.g., B-GND01-XX1-K02) |
+| `street`           | Your street and house number              |
+| `zip_city`         | Your postal code and city                 |
+| `student_id`       | Your WBH Matrikelnummer                   |
+| `course_id`        | Your Studiengangsnummer                   |
+| `assignment_title` | The main title of the module              |
+| `b_exam_name`      | The specific name of the B-Aufgabe        |
+| `variant`          | The variant/version of the assignment     |
 
 ## Project Structure
 

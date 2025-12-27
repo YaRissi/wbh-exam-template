@@ -25,7 +25,8 @@
       #set text(8pt)
       #grid(
         columns: (1fr, 1fr),
-        align(left)[#image("../assets/logo-wbh.jpg", width: 3cm)], align(right + bottom)[#assignment_code],
+        align(left)[#image("../assets/logo-wbh.jpg", width: 3cm)],
+        align(right + bottom)[#assignment_code],
       )
       #line(length: 100%, stroke: 0.5pt + wbh-colors.primary)
     ],

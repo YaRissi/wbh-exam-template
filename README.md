@@ -40,7 +40,7 @@ This template is not yet published to the official Typst Universe. You can insta
 3. You can now initialize a new project from this template:
 
    ```bash
-   typst init @local/wbh-exam-template:0.2.3 my-assignment
+   typst init @local/wbh-exam-template:0.2.4 my-assignment
    ```
 
 ## Usage
@@ -50,7 +50,7 @@ This template is not yet published to the official Typst Universe. You can insta
 If you have installed the package locally, import it using the `@local` syntax in your `main.typ`:
 
 ```typst
-#import "@local/wbh-exam-template:0.2.3": project
+#import "@local/wbh-exam-template:0.2.4": project
 
 #show: project.with(
   last_name: "Mustermann",
@@ -62,7 +62,7 @@ If you have installed the package locally, import it using the `@local` syntax i
   course_id: "123456",
   assignment_title: "Grundlagen der Informatik",
   b_exam_name: "Thema der B-Aufgabe",
-  variant: "XXXXXXXXXXX",
+  edition: "XXXXXXXXXXX",
 )
 
 // Include your tasks
@@ -74,7 +74,7 @@ If you have installed the package locally, import it using the `@local` syntax i
 You can split your solutions into separate files within the `tasks/` directory. Each task file should import the required functions from the package:
 
 ```typst
-#import "@local/wbh-exam-template:0.2.3": task, subtask, source
+#import "@local/wbh-exam-template:0.2.4": task, subtask, source
 
 #task(points: 10, title: "Example Task")[
   Your task description or question goes here.
@@ -120,7 +120,7 @@ Don't forget to add your references to `references.bib` and include the bibliogr
 | `course_id`        | Your Studiengangsnummer                   |
 | `assignment_title` | The main title of the module              |
 | `b_exam_name`      | The specific name of the B-Aufgabe        |
-| `variant`          | The variant/version of the assignment     |
+| `edition`          | The edition of the B-Aufgabe              |
 
 ## Project Structure
 

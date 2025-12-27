@@ -11,7 +11,7 @@
   course_id: "",
   assignment_title: "",
   b_exam_name: "",
-  variant: "",
+  edition: "",
   body,
 ) = {
   // Set document metadata
@@ -70,7 +70,7 @@
       row-gutter: 0.8em,
 
       [*Name:*], [#first_name #last_name], [*Studiengang:*], [#course_id],
-      [*Matrikel-Nr.:*], [#student_id], [*Variante:*], [#variant],
+      [*Matrikel-Nr.:*], [#student_id], [*Auflage:*], [#edition],
       [*Anschrift:*], [#street \ #zip_city], [], [],
     )
   ]

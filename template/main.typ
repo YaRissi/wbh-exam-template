@@ -11,7 +11,7 @@
   course_id: "XXXXXXX",
   assignment_title: "Grundlagen der Informatik",
   b_exam_name: "Name der B-Aufgabe",
-  variant: "XXXXXXX",
+  edition: "XXXXXXX",
 )
 
 // --- Solutions ---

@@ -1,4 +1,4 @@
-#import "../../src/lib.typ": solution, source, subtask, task
+#import "../../src/lib.typ": solution, subtask, task
 
 #task(points: 35, title: "Programmierung: Rekursion")
 

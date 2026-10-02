@@ -3,4 +3,6 @@
 
 #import "components/utils.typ": wbh-colors
 #import "components/layout.typ": project
-#import "components/elements.typ": solution, source, subtask, task
+#import "components/elements.typ": (
+  bibliography_section, solution, source, subtask, task,
+)

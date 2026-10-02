@@ -1,136 +1,61 @@
 # /// script
-# requires-python = ">=3.9"
-# dependencies = [
-#     "tomli>=2.0.1",
-# ]
+# requires-python = ">=3.11"
 # ///
 
-import fnmatch
 import os
 import shutil
 import sys
-import tomli
+import tomllib
 from pathlib import Path
 
-def get_data_dir():
-    """
-    Get the data directory based on the user's OS.
-    Reference: https://github.com/typst/packages?tab=readme-ov-file#local-packages
-    """
+REPO_ROOT = Path(__file__).resolve().parent.parent
+ALWAYS_EXCLUDED = {
+    ".git",
+    ".github",
+    ".gitlab",
+    ".gitlab-ci.yml",
+    ".claude",
+    ".vscode",
+    ".idea",
+    "scripts",
+}
+
+
+def data_dir() -> Path:
+    # https://github.com/typst/packages#local-packages
     if sys.platform == "win32":
         return Path(os.environ["APPDATA"])
-    elif sys.platform == "darwin":
+    if sys.platform == "darwin":
         return Path.home() / "Library/Application Support"
-    else:
-        # Linux and others
-        xdg_data_home = os.environ.get("XDG_DATA_HOME")
-        if xdg_data_home:
-            return Path(xdg_data_home)
-        return Path.home() / ".local/share"
-
-def main():
-    # Base directory of the repository (assumed to be parent of scripts/)
-    repo_root = Path(__file__).parent.parent
-    toml_path = repo_root / "typst.toml"
-
-    if not toml_path.exists():
-        print(f"Error: {toml_path} not found.")
-        sys.exit(1)
-
-    with open(toml_path, "rb") as f:
-        config = tomli.load(f)
-
-    package = config.get("package", {})
-    name = package.get("name")
-    version = package.get("version")
-    
-    if not name or not version:
-        print("Error: Could not determine package name or version from typst.toml")
-        sys.exit(1)
-
-    print(f"Detected package: {name} v{version}")
-
-    # Determine exclude list
-    # We always exclude the .git directory and the scripts directory itself
-    # typst.toml excludes usually apply to the package bundling, but we can respect them too if we want
-    # For now, let's just implement a robust copy that ignores common dev files.
-    
-    # User requested: "Store a package in {data-dir}/typst/packages/local/mypkg/1.0.0"
-    data_dir = get_data_dir()
-    target_dir = data_dir / "typst" / "packages" / "local" / name / version
-
-    print(f"Target directory: {target_dir}")
-
-    if target_dir.exists():
-        print("Removing existing version...")
-        shutil.rmtree(target_dir)
-    
-    # Get exclusions from typst.toml if present
-    excludes = package.get("exclude", [])
-    # Add some sensible defaults for local dev that might not be in toml
-    hardcoded_excludes = [".git", ".github", ".gitlab", "scripts", ".gemini", ".vscode", ".idea", "node_modules", "*.pdf"]
-    
-    def ignore_patterns(path, names):
-        ignored = set()
-        for name in names:
-            # Check hardcoded excludes
-            for pattern in hardcoded_excludes:
-                if fnmatch.fnmatch(name, pattern):
-                    ignored.add(name)
-                    break
-            
-            if name in ignored:
-                continue
-            
-            # Check typst.toml excludes (simple exact match or folder match)
-            # This is a basic implementation. real globbing might be needed but usually top-level folders checks are enough for templates
-            for pattern in excludes:
-                clean_pattern = pattern.rstrip('/')
-                if name == clean_pattern:
-                    ignored.add(name)
-        return ignored
-
-    print("Copying files...")
-    try:
-        shutil.copytree(repo_root, target_dir, ignore=ignore_patterns)
+    return Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share"))
 
 
-        # Post-process: Update imports in the installed template files
-        # We recursively look for .typ files in the installed template directory
-        # and replace relative imports with the package import.
-        template_dir = target_dir / "template"
-        package_import = f'@local/{name}:{version}'
-        
-        if template_dir.exists():
-            for file_path in template_dir.rglob("*.typ"):
-                content = file_path.read_text("utf-8")
-                
-                # Check for relative imports and replace them
-                # We look for common relative patterns used in the template
-                # IMPORTANT: Process longer paths first to avoid substring matching issues
-                # (e.g. replacing "../src" inside "../../src")
-                replacements = [
-                    ('../../src/lib.typ', package_import),
-                    ('../src/lib.typ', package_import),
-                ]
-                
-                new_content = content
-                modified = False
-                for old, new in replacements:
-                    if old in new_content:
-                        new_content = new_content.replace(old, new)
-                        modified = True
-                
-                if modified:
-                    print(f"Updated imports in {file_path.relative_to(target_dir)}")
-                    file_path.write_text(new_content, "utf-8")
+def main() -> None:
+    package = tomllib.loads((REPO_ROOT / "typst.toml").read_text("utf-8"))["package"]
+    name, version = package["name"], package["version"]
+    excluded = ALWAYS_EXCLUDED | {p.rstrip("/") for p in package.get("exclude", [])}
 
-        print(f"Successfully installed {name}:{version} to local packages.")
-        print(f"Usage: #import \"{package_import}\": *")
-        print(f"typst init {package_import}")
-    except Exception as e:
-        print(f"Failed to copy files: {e}")
-        sys.exit(1)
+    target = data_dir() / "typst" / "packages" / "local" / name / version
+    if target.exists():
+        shutil.rmtree(target)
+
+    def ignore(_dir: str, names: list[str]) -> set[str]:
+        return {n for n in names if n in excluded or n.endswith(".pdf")}
+
+    shutil.copytree(REPO_ROOT, target, ignore=ignore)
+
+    package_import = f"@local/{name}:{version}"
+    for typ_file in (target / "template").rglob("*.typ"):
+        content = typ_file.read_text("utf-8")
+        rewritten = content.replace("../../src/lib.typ", package_import).replace(
+            "../src/lib.typ", package_import
+        )
+        if rewritten != content:
+            typ_file.write_text(rewritten, "utf-8")
+
+    print(f"Installed {package_import} to {target}")
+    print(f"Create a project with: typst init {package_import} my-assignment")
+
 
 if __name__ == "__main__":
     main()

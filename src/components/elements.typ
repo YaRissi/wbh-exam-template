@@ -76,3 +76,35 @@
     ]
   }
 }
+
+// Bibliography section with optional clickable inline-cite anchors.
+//
+// IMPORTANT: the `bib` argument must be a pre-constructed bibliography
+// element from the caller's own file, because Typst resolves bib paths
+// relative to the file in which `bibliography(...)` is called. If we
+// called it from inside the template, paths would resolve against the
+// template directory — wrong.
+//
+// Usage:
+//   #bibliography_section(
+//     bibliography("references.bib", style: "apa", title: "Literaturverzeichnis", full: true),
+//     cite_display: _bib_display,
+//   )
+//
+// - Emits a pagebreak before the bibliography.
+// - If `cite_display` is non-empty, emits one hidden `bib_<key>` anchor per
+//   entry so the `show cite:` rule installed by `project` can link to them.
+#let bibliography_section(
+  bib,
+  cite_display: (:),
+) = [
+  #pagebreak()
+  #if cite_display.len() > 0 [
+    #hide[
+      #for key in cite_display.keys() [
+        #box[.]#label("bib_" + key)
+      ]
+    ]
+  ]
+  #bib
+]

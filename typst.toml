@@ -1,14 +1,14 @@
 [package]
 name = "wbh-exam-template"
-version = "0.3.0"
+version = "0.4.3"
 entrypoint = "src/lib.typ"
 authors = ["YaRissi"]
 license = "MIT"
 description = "A Typst template for WBH exam solutions (B-Aufgaben)."
-repository = "https://github.com/YaRissi/wbh-typst-template"
+repository = "https://github.com/YaRissi/wbh-exam-template"
 keywords = ["wbh", "exam", "template", "education"]
 categories = ["text"]
-exclude = [".gitlab/", ".gitlab-ci.yml", ".gemini/", "scripts/"]
+exclude = [".gitlab/", ".gitlab-ci.yml", "renovate.json", "scripts/"]
 
 [template]
 path = "template"

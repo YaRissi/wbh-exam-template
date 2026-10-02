@@ -12,6 +12,12 @@
   assignment_title: "",
   b_exam_name: "",
   edition: "",
+  // Optional: map BibTeX keys to display acronyms for inline citations.
+  // Example: ("dtf01": "DTF01", "wbgu2019": "WBGU", "claude_ai": "Claude")
+  // Inline `@dtf01` then renders as clickable "DTF01" linking to a hidden
+  // anchor in the Literaturverzeichnis (emitted by `bibliography_section`).
+  // Empty dict = no override, cites render as Typst default.
+  cite_display: (:),
   body,
 ) = {
   // Set document metadata
@@ -20,7 +26,7 @@
   // Set page properties (A4, margins, header/footer)
   set page(
     paper: "a4",
-    margin: (top: 3cm, bottom: 2.5cm, left: 2.5cm, right: 4cm),
+    margin: (top: 3cm, bottom: 2.5cm, left: 1.5cm, right: 1.5cm),
     header: [
       #set text(8pt)
       #grid(
@@ -64,6 +70,21 @@
   show heading.where(level: 1): it => {
     set text(fill: wbh-colors.primary, size: 14pt)
     block(below: 1em, it)
+  }
+
+  // Citation display override: if `cite_display` is non-empty, inline cites
+  // are rendered as clickable links showing the acronym instead of the
+  // APA author-year label. The link targets `bib_<key>` labels which must
+  // be emitted before the bibliography (handled by `bibliography_section`).
+  show cite: it => {
+    let k = str(it.key)
+    if cite_display.len() > 0 and k in cite_display {
+      let shown = cite_display.at(k)
+      if it.supplement != none { shown = [#shown, #it.supplement] }
+      link(label("bib_" + k), shown)
+    } else {
+      it
+    }
   }
 
   // Title Block
